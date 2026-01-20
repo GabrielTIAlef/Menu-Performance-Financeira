@@ -68,6 +68,7 @@ Padronizações aplicadas a todas as tabelas:
 <img width="982" height="580" alt="image" src="https://github.com/user-attachments/assets/fe2c6d76-e431-4658-bff7-1532fb746d5b" />
 ---
 ## 📐 Medidas DAX
+
 | Categoria | Medida | Descrição |
 |--------|--------|-----------|
 | Inadimplência | **Inadimplência Valor** | Soma dos valores em atraso |
@@ -89,4 +90,3 @@ Padronizações aplicadas a todas as tabelas:
 | Orçamento | **Valor Orçado Despesa** | Valor orçado para despesas |
 | Orçamento | **Aderência Orçamentária Receita %** | Receita realizada / orçada |
 | Orçamento | **Aderência Orçamentária Despesa %** | Despesa realizada / orçada |
----
