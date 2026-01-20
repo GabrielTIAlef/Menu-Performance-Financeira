@@ -72,23 +72,23 @@ Padronizações aplicadas a todas as tabelas:
 
 | Medida | Código DAX |
 |------|-----------|
-| **Inadimplência Valor** | `CALCULATE ( <br>    SUM ( 'dw fato_contas_receber'[valor] ), <br>    'dw dim_status'[status] = "atrasado" <br> )` |
-| **Inadimplência %** | `DIVIDE ( <br>    [Inadimplência Valor], <br>    SUM ( 'dw fato_contas_receber'[valor] ) <br> )` |
-| **Custo Total** | `CALCULATE ( <br>    SUM ( 'dw fato_custos_despesas'[valor] ), <br>    'dw dim_centro_custo'[centro_custo] = "operacional" <br> )` |
-| **Despesa Total** | `CALCULATE ( <br>    SUM ( 'dw fato_custos_despesas'[valor] ), <br>    'dw dim_centro_custo'[centro_custo] IN {"administrativo", "comercial"} <br> )` |
-| **Custo sobre Receita %** | `DIVIDE ( <br>    [Custo Total], <br>    [Receita Bruta] <br> )` |
-| **Despesa sobre Receita %** | `DIVIDE ( <br>    [Despesa Total], <br>    [Receita Bruta] <br> )` |
+| **Inadimplência Valor** | `CALCULATE (SUM ( 'dw fato_contas_receber'[valor] ),'dw dim_status'[status] = "atrasado")` |
+| **Inadimplência %** | `DIVIDE ([Inadimplência Valor],SUM ( 'dw fato_contas_receber'[valor] ))` |
+| **Custo Total** | `CALCULATE (SUM ( 'dw fato_custos_despesas'[valor] ),'dw dim_centro_custo'[centro_custo] = "operacional")` |
+| **Despesa Total** | `CALCULATE (SUM ( 'dw fato_custos_despesas'[valor] ),'dw dim_centro_custo'[centro_custo] IN {"administrativo", "comercial"})` |
+| **Custo sobre Receita %** | `DIVIDE ([Custo Total],[Receita Bruta])` |
+| **Despesa sobre Receita %** | `DIVIDE ([Despesa Total],[Receita Bruta])` |
 | **Receita Bruta** | `SUM ( 'dw fato_faturamento'[receita_bruta] )` |
 | **Receita Líquida** | `SUM ( 'dw fato_faturamento'[receita_liquida] )` |
 | **Margem Bruta** | `[Receita Bruta] - [Custo Total]` |
-| **Margem Bruta %** | `DIVIDE ( <br>    [Margem Bruta], <br>    [Receita Bruta] <br> )` |
+| **Margem Bruta %** | `DIVIDE ([Margem Bruta],[Receita Bruta])` |
 | **EBITDA** | `[Receita Liquida] - [Custo Total] - [Despesa Total]` |
-| **Margem Líquida %** | `DIVIDE ( <br>    [Receita Liquida] - [Custo Total] - [Despesa Total], <br>    [Receita Liquida] <br> )` |
-| **Receita MoM %** | `VAR Atual = [Receita Liquida] <br> VAR Anterior = <br>    CALCULATE ( <br>        [Receita Liquida], <br>        DATEADD ( 'dw dim_tempo'[data], -1, MONTH ) <br>    ) <br> RETURN <br> DIVIDE ( Atual - Anterior, Anterior )` |
-| **Receita YoY %** | `VAR Atual = [Receita Liquida] <br> VAR AnoAnterior = <br>    CALCULATE ( <br>        [Receita Liquida], <br>        SAMEPERIODLASTYEAR ( 'dw dim_tempo'[data] ) <br>    ) <br> RETURN <br> DIVIDE ( Atual - AnoAnterior, AnoAnterior )` |
-| **Ticket Médio** | `DIVIDE ( <br>    [Receita Bruta], <br>    DISTINCTCOUNT ( 'dw dim_cliente'[cliente_id] ) <br> )` |
-| **Valor Orçado Despesa** | `CALCULATE ( <br>    SUM ( 'dw fato_orcamento'[valor_orcado] ), <br>    'dw dim_tipo_orcamento'[tipo] = "despesa" <br> )` |
-| **Valor Orçado Receita** | `CALCULATE ( <br>    SUM ( 'dw fato_orcamento'[valor_orcado] ), <br>    'dw dim_tipo_orcamento'[tipo] = "receita" <br> )` |
-| **Aderência Orçamentária Despesa %** | `DIVIDE ( <br>    SUM ( 'dw fato_custos_despesas'[valor] ), <br>    [Valor Orçado Despesa] <br> )` |
-| **Aderência Orçamentária Receita %** | `DIVIDE ( <br>    [Receita Liquida], <br>    [Valor Orçado Receita] <br> )` |
+| **Margem Líquida %** | `DIVIDE ([Receita Liquida] - [Custo Total] - [Despesa Total],[Receita Liquida])` |
+| **Receita MoM %** | `VAR Atual = [Receita Liquida] VAR Anterior = CALCULATE ( [Receita Liquida], DATEADD ( 'dw dim_tempo'[data], -1, MONTH ) ) RETURN DIVIDE ( Atual - Anterior, Anterior )` |
+| **Receita YoY %** | `VAR Atual = [Receita Liquida] VAR AnoAnterior = CALCULATE ( [Receita Liquida], SAMEPERIODLASTYEAR ( 'dw dim_tempo'[data] ) )  RETURN DIVIDE ( Atual - AnoAnterior, AnoAnterior )` |
+| **Ticket Médio** | `DIVIDE ( [Receita Bruta], DISTINCTCOUNT ( 'dw dim_cliente'[cliente_id] ))` |
+| **Valor Orçado Despesa** | `CALCULATE ( SUM ( 'dw fato_orcamento'[valor_orcado] ), 'dw dim_tipo_orcamento'[tipo] = "despesa" )` |
+| **Valor Orçado Receita** | `CALCULATE ( SUM ( 'dw fato_orcamento'[valor_orcado] ), 'dw dim_tipo_orcamento'[tipo] = "receita" )` |
+| **Aderência Orçamentária Despesa %** | `DIVIDE ( SUM ( 'dw fato_custos_despesas'[valor] ), [Valor Orçado Despesa] )` |
+| **Aderência Orçamentária Receita %** | `DIVIDE ( [Receita Liquida], [Valor Orçado Receita] )` |
 
