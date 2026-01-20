@@ -64,6 +64,8 @@ Padronizações aplicadas a todas as tabelas:
 - Dimensão de tempo central compartilhada entre os fatos
 - Estrutura otimizada para performance e clareza analítica
 <img width="1010" height="624" alt="image" src="https://github.com/user-attachments/assets/a1edc312-35ab-4405-b55c-c68633c5fdf6" />
+
+<img width="982" height="580" alt="image" src="https://github.com/user-attachments/assets/fe2c6d76-e431-4658-bff7-1532fb746d5b" />
 ---
 ## 📐 Medidas DAX
 | Categoria | Medida | Descrição |
